@@ -39,3 +39,4 @@ Then, open up the gulpfile.js where you can tweak directories, and your main app
 * **buildWatch**: A task to watch the build directories for changed HTML, JavaScript, or CSS files and re-build the app on the fly.
 * **cleanBuild**: A task to delete the build directory first, and then run a build.
 * **buildProd**: A task to build a production build.  First this runs the clean task; then it runs the build process.  If you run this task source maps will not be created.
+* **test**: A Task to run Unit Tests with Karma and Jasmine.
