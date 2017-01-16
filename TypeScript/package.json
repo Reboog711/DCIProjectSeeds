@@ -1,0 +1,24 @@
+{
+  "name": "DCITypeScriptProjectSeed",
+  "version": "0.0.1",
+  "description": "DotComIt Project Seed for building browser based applications with TypeScript.",
+  "author": "Jeffry Houser",
+  "license": "ISC",
+  "devDependencies": {
+    "browserify": "^13.3.0",
+    "del": "^2.2.2",
+    "exorcist": "^0.4.0",
+    "gulp": "^3.9.1",
+    "gulp-if": "^2.0.2",
+    "gulp-uglify": "^2.0.0",
+    "run-sequence": "^1.2.2",
+    "tsify": "^3.0.0",
+    "typescript": "^2.1.4",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Reboog711/DCIProjectSeeds/TypeScript"
+  }
+}
