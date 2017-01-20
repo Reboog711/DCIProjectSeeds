@@ -37,4 +37,3 @@ Then, open up the gulpfile.js where you can tweak directories, and your main app
 
 * Configure this seed for compiling CSS
 * Configure this seed for unit Tests
-* Either modify this seed, or create another seed, for building Angular 2 applications.
