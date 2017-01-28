@@ -75,7 +75,7 @@ gulp.task("buildTS", ["tslint"], function() {
     return tsResult.js
         .pipe(uglify())
         .pipe(gulpIf(devMode,sourcemaps.write(mapPath)))
-        .pipe(gulp.dest("build"));
+        .pipe(gulp.dest(destinationPath));
 });
 
 // copy JS libraries custom to the project
