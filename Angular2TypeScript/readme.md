@@ -39,11 +39,11 @@ Then, open up the gulpfile.js where you can tweak directories, and your main app
 * **build**: A task to create a build. It runs buildTS, copyJSLibraries, copyAngularLibraries, and copyHTML.
 * **cleanBuild**: A task to delete the build directory first, and then run a build.
 * **buildProd**: A task to build a production build.  First this runs the clean task; then it runs the build process.  If you run this task source maps will not be created.
+* **buildWatch**: A task to watch the build directories for changed HTML, TypeScript, or JavaScript files and re-build the app on the fly.
 
 ## Todo List
 
 
-* Create a buildWatch task
 * Configure this seed for compiling CSS
 * Configure this seed for unit Tests
 * Figure out a way to concat the output to create a single JS File--it only appears to work if I include all Angular libraries as part of that single output file.

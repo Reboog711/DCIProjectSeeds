@@ -113,9 +113,23 @@ gulp.task('cleanBuild', function () {
 });
 
 // build a production build
-// delets the build directory w/ clean; then sets the devMode to false; and runs the build task
+// deletes the build directory w/ clean; then sets the devMode to false; and runs the build task
 // devMode to true means no source maps.
 gulp.task('buildProd', function(){
     devMode = false;
-    runSequence('clean', 'build');
+    gulp.start('cleanBuild')
+});
+
+// watching for changes on the fly
+gulp.task('buildWatch', ['build'], function(){
+    gulp.watch(typeScriptSource,['buildTS']).on('change', function(event){
+        console.log('File Path' + event.path);
+    })
+    gulp.watch(htmlSource,['copyHTML']).on('change', function(event){
+        console.log('File Path' + event.path);
+    })
+    gulp.watch(javaScriptLibraries,['copyJSLibraries']).on('change', function(event){
+        console.log('File Path' + event.path);
+    })
+
 });
