@@ -1,34 +1,11 @@
 /**
  * Created by jhouser on 1/19/2017.
+ * updated 3/25/2017 to move configuration variables to separate file
  */
 
-var sourceRoot = "src/";
-var destinationPath = 'build';
-var typeScriptSource = [sourceRoot + "**/*.ts"];
-var htmlSource = [sourceRoot + '**/*.html'];
+// if you need to edit paths; it is best do so in the config.js file
+var config = require("./config").config;
 
-// Compile TypeScript sources and create sourcemaps in build directory.
-var mapPath = 'maps';
-
-// JavaScript libraries
-var javaScriptLibraries = [sourceRoot + 'js/**/*.js'];
-var destinationPathForJSLibraries = destinationPath + '/js';
-
-// an array of Globs that point to the Angular libraries
-var angularLibraries = [
-    'core-js/client/shim.min.js',
-    'zone.js/dist/**',
-    'reflect-metadata/Reflect.js',
-    'systemjs/dist/system.src.js',
-    '@angular/**/bundles/**',
-    'rxjs/**/*.js',
-    'angular-in-memory-web-api/bundles/in-memory-web-api.umd.js'
-]
-
-
-// variable to determine if source maps are used or not
-// by default true; but if we create a production build they are not generated
-var devMode = true;
 
 // installed w/ npm install --save-dev gulp
 var gulp = require("gulp");
@@ -58,7 +35,7 @@ var runSequence = require('run-sequence');
 
 // Lint all custom TypeScript files.
 gulp.task('tslint', function() {
-    return gulp.src(typeScriptSource)
+    return gulp.src(config.typeScriptSource)
         .pipe(tslint({
             formatter: 'prose'
         }))
@@ -69,39 +46,38 @@ gulp.task('tslint', function() {
 // the basic task for compiling TypeScript; will run lint on the files first.
 // will minimize code w/ uglify and optionally create source maps
 gulp.task("buildTS", ["tslint"], function() {
-    var tsResult = gulp.src(typeScriptSource)
-        .pipe(gulpIf(devMode,sourcemaps.init()))
+    var tsResult = gulp.src(config.typeScriptSource)
+        .pipe(gulpIf(config.devMode,sourcemaps.init()))
         .pipe(tsProject());
     return tsResult.js
         .pipe(uglify())
-        .pipe(gulpIf(devMode,sourcemaps.write(mapPath)))
-        .pipe(gulp.dest(destinationPath));
+        .pipe(gulpIf(config.devMode,sourcemaps.write(config.mapPath)))
+        .pipe(gulp.dest(config.destinationPath));
 });
 
 // copy JS libraries custom to the project
 gulp.task('copyJSLibraries', function () {
-    gulp.src(javaScriptLibraries)
-        .pipe(gulp.dest(destinationPathForJSLibraries));
+    gulp.src(config.javaScriptLibraries)
+        .pipe(gulp.dest(config.destinationPathForJSLibraries));
 });
 
 // task to copy all the angular libraries
 // and other dependencies instlled by Node
 gulp.task('copyAngularLibraries', function () {
     // copy JS libraries custom to the project
-    gulp.src(angularLibraries, {cwd: "node_modules/**"})
-        .pipe(gulp.dest(destinationPathForJSLibraries));
+    gulp.src(config.angularLibraries, {cwd: config.nodeModulesSource})
+        .pipe(gulp.dest(config.destinationPathForJSLibraries));
 });
 
 // a task to copy HTML files from src to the build folder
 gulp.task('copyHTML', function () {
-    return gulp.src(htmlSource)
-        .pipe(gulp.dest(destinationPath));
+    return gulp.src(config.htmlSource)
+        .pipe(gulp.dest(config.destinationPath));
 });
 
-// a task to delete the build directory and everythying in it
-var deletePath = [destinationPath + '/**']
+// a task to delete the build directory and everything in it
 gulp.task('clean', function () {
-    return del(deletePath);
+    return del(config.deletePath);
 });
 
 // Build the project.
@@ -116,19 +92,19 @@ gulp.task('cleanBuild', function () {
 // deletes the build directory w/ clean; then sets the devMode to false; and runs the build task
 // devMode to true means no source maps.
 gulp.task('buildProd', function(){
-    devMode = false;
+    config.devMode = false;
     gulp.start('cleanBuild')
 });
 
 // watching for changes on the fly
 gulp.task('buildWatch', ['build'], function(){
-    gulp.watch(typeScriptSource,['buildTS']).on('change', function(event){
+    gulp.watch(config.typeScriptSource,['buildTS']).on('change', function(event){
         console.log('File Path' + event.path);
     })
-    gulp.watch(htmlSource,['copyHTML']).on('change', function(event){
+    gulp.watch(config.htmlSource,['copyHTML']).on('change', function(event){
         console.log('File Path' + event.path);
     })
-    gulp.watch(javaScriptLibraries,['copyJSLibraries']).on('change', function(event){
+    gulp.watch(config.javaScriptLibraries,['copyJSLibraries']).on('change', function(event){
         console.log('File Path' + event.path);
     })
 

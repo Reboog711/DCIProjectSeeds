@@ -14,7 +14,8 @@ npm install
 
 This will install all the required dependencies via NodeJS.
 
-Then, open up the gulpfile.js where you can tweak directories, and your main application.
+Then, open up the config.js file where you can tweak directories and other config settings. 
+The scripts are located in gulpfile.js.
 
 
 ## Directory Structure
@@ -43,7 +44,11 @@ Then, open up the gulpfile.js where you can tweak directories, and your main app
 
 ## Todo List
 
-
 * Configure this seed for compiling CSS
-* Configure this seed for unit Tests
-* Figure out a way to concat the output to create a single JS File--it only appears to work if I include all Angular libraries as part of that single output file.
+* Configure this seed for unit tests
+* Figure out a way to Enable Prod mode for Angular 2 automatically when running the buildProd
+
+## Known Issues
+
+* The buildWatch task will not process HTML files that were created after the buildWatch task starts.
+
