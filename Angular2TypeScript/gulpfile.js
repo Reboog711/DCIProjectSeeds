@@ -33,6 +33,14 @@ var uglify = require('gulp-uglify');
 var runSequence = require('run-sequence');
 
 
+// installed for CSS processing
+// installed via npm install --save-dev gulp-clean-css
+var cleanCSS = require("gulp-clean-css");
+// installed for CSS processing
+// installed w/ npm install --save-dev gulp-concat
+var concat = require('gulp-concat');
+
+
 // Lint all custom TypeScript files.
 gulp.task('tslint', function() {
     return gulp.src(config.typeScriptSource)
@@ -54,6 +62,28 @@ gulp.task("buildTS", ["tslint"], function() {
         .pipe(gulpIf(config.devMode,sourcemaps.write(config.mapPath)))
         .pipe(gulp.dest(config.destinationPath));
 });
+
+gulp.task('processCSS', function () {
+    gulp.src(config.cssSource)
+        .pipe(gulpIf(config.devMode,sourcemaps.init()))
+        .pipe(cleanCSS())
+        .pipe(concat(config.cssDestinationFile))
+        .pipe(gulpIf(config.devMode,sourcemaps.write(config.mapPath)))
+        .pipe(gulp.dest(config.destinationPath))
+});
+
+gulp.task('copyAngularCSS', function () {
+    gulp.src(config.cssStyleURLsSource)
+        .pipe(gulpIf(config.devMode,sourcemaps.init()))
+        .pipe(cleanCSS())
+        .pipe(gulpIf(config.devMode,sourcemaps.write(config.mapPath)))
+        .pipe(gulp.dest(config.destinationPathForCSSStyleURLs))
+});
+
+// Build the project.
+gulp.task("buildCSS", ['copyAngularCSS', 'processCSS']);
+
+
 
 // copy JS libraries custom to the project
 gulp.task('copyJSLibraries', function () {
@@ -81,7 +111,7 @@ gulp.task('clean', function () {
 });
 
 // Build the project.
-gulp.task("build", ['buildTS', 'copyJSLibraries', 'copyAngularLibraries','copyHTML']);
+gulp.task("build", ['buildTS', 'copyJSLibraries', 'copyAngularLibraries','copyHTML','buildCSS']);
 
 // delete everything then build the project
 gulp.task('cleanBuild', function () {
@@ -100,12 +130,20 @@ gulp.task('buildProd', function(){
 gulp.task('buildWatch', ['build'], function(){
     gulp.watch(config.typeScriptSource,['buildTS']).on('change', function(event){
         console.log('File Path' + event.path);
-    })
+    });
     gulp.watch(config.htmlSource,['copyHTML']).on('change', function(event){
         console.log('File Path' + event.path);
-    })
+    });
     gulp.watch(config.javaScriptLibraries,['copyJSLibraries']).on('change', function(event){
         console.log('File Path' + event.path);
-    })
+    });
+
+    gulp.watch(config.cssSource,['processCSS']).on('change', function(event){
+        console.log('File Path' + event.path);
+    });
+
+    gulp.watch(config.cssStyleURLsSource,['copyAngularCSS']).on('change', function(event){
+        console.log('File Path' + event.path);
+    });
 
 });

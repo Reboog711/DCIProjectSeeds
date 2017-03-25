@@ -23,6 +23,8 @@
   "devDependencies": {
     "del": "^2.2.2",
     "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.0.4",
+    "gulp-concat": "^2.6.1",
     "gulp-if": "^2.0.2",
     "gulp-sourcemaps": "^2.4.0",
     "gulp-tslint": "^7.0.1",

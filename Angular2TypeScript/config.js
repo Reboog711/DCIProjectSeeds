@@ -30,7 +30,27 @@ var configObject = {
     // the final destination of the JavaScript libraries
     // The directory structure of the javaScriptLibraries directory will be retained when moving files from source to destination
     // if you change this value; the serc/systemJSConfig/systemjs.config.js may also need updating
-    destinationPathForJSLibraries : baseDirs.destinationPath + '/js'
+    destinationPathForJSLibraries : baseDirs.destinationPath + '/js',
+
+    // a GLOB to find all the CSS Source
+    // this purposely ignores CSS in the com directory because we assume anything in there
+    // is Angular 2 component specific and will be referenced using the styleUrls property
+    // so that file can't go away and be combined
+    cssSource : [baseDirs.sourceRoot + '**/*.css',
+                '!' + baseDirs.sourceRoot + 'com/**/*.css'],
+
+    // The destination file for all the merged css
+    cssDestinationFile : 'app.min.css',
+
+    // a GLOB pointing to the CSS files inside the com directory, which presumably
+    // will be loaded via Angular 2 Component styleUrls properties
+    // these files will be minimized and copied, but not moved.
+    cssStyleURLsSource : [baseDirs.sourceRoot + 'com/**/*.css'],
+
+    // final resting place for the Angular styleURLs CSS that are copied from source to destination
+    // subdirectory structure is retained
+    destinationPathForCSSStyleURLs : baseDirs.destinationPath + '/com'
+
 
 };
 

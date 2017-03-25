@@ -33,6 +33,9 @@ The scripts are located in gulpfile.js.
 
 * **tslint**: A task used to verify the type script files.  Called automatically before buildTS is run. 
 * **buildTS**: A task used to compile TypeScript files in the source.  It minimizes them with Uglify.  By default source maps are created.
+* **processCSS**: A task used to process CSS. It minimizes them with Clean-CSS and concatenates it to a single CSS file. CSS Files in the com directory are ignored under the assumption they are referenced by Angular 2 components directly using the styleUrls property. By default source maps are created.
+* **copyAngularCSS**: A task used to process CSS files used by Angular 2.  It minimizes them with Clean-CSS, and copies the files to the com directory. It is assumed files in the com directory are referenced by Angular 2 components with the styleUrls property, and cannot be combined to a single file. By default source maps are created.
+* **buildCSS**: A task used to process all CS. It runs processCSS and copyAngularCSS.
 * **copyJSLibraries**: A task to copy all JavaScript files from the src/js directory to the build/js directory.
 * **copyAngularLibraries**: A task to copy all Angular JS library files from node_modules directory to the build/js directory.
 * **copyHTML**: A task to copy all HTML in the src directory to the build directory. These files are left unchanged.
