@@ -64,7 +64,7 @@ gulp.task("buildTS", ["tslint"], function() {
 });
 
 gulp.task('processCSS', function () {
-    gulp.src(config.cssSource)
+    gulp.src(config.cssSource, { base: '.' })
         .pipe(gulpIf(config.devMode,sourcemaps.init()))
         .pipe(cleanCSS())
         .pipe(concat(config.cssDestinationFile))
@@ -76,7 +76,7 @@ gulp.task('copyAngularCSS', function () {
     gulp.src(config.cssStyleURLsSource)
         .pipe(gulpIf(config.devMode,sourcemaps.init()))
         .pipe(cleanCSS())
-        .pipe(gulpIf(config.devMode,sourcemaps.write(config.mapPath)))
+        .pipe(gulpIf(config.devMode,sourcemaps.write(config.destinationPathForCSSStyleURLMaps)))
         .pipe(gulp.dest(config.destinationPathForCSSStyleURLs))
 });
 

@@ -5,6 +5,10 @@
 var baseDirs = {
     // the root for all source code
     sourceRoot : "src/",
+
+    // the code root; we assume all your custom angular components will go here or in some subdirectory of it
+    codeRoot : 'com',
+
     // the output path for the processed code
     destinationPath : 'build',
 
@@ -37,7 +41,7 @@ var configObject = {
     // is Angular 2 component specific and will be referenced using the styleUrls property
     // so that file can't go away and be combined
     cssSource : [baseDirs.sourceRoot + '**/*.css',
-                '!' + baseDirs.sourceRoot + 'com/**/*.css'],
+                '!' + baseDirs.sourceRoot + baseDirs.codeRoot + '/**/*.css'],
 
     // The destination file for all the merged css
     cssDestinationFile : 'app.min.css',
@@ -45,12 +49,15 @@ var configObject = {
     // a GLOB pointing to the CSS files inside the com directory, which presumably
     // will be loaded via Angular 2 Component styleUrls properties
     // these files will be minimized and copied, but not moved.
-    cssStyleURLsSource : [baseDirs.sourceRoot + 'com/**/*.css'],
+    cssStyleURLsSource : [baseDirs.sourceRoot + baseDirs.codeRoot + '/**/*.css'],
 
     // final resting place for the Angular styleURLs CSS that are copied from source to destination
     // subdirectory structure is retained
-    destinationPathForCSSStyleURLs : baseDirs.destinationPath + '/com'
+    destinationPathForCSSStyleURLs : baseDirs.destinationPath + '/' + baseDirs.codeRoot,
 
+    // the destination path for CSS Style URL Maps
+    // this puts them in the same map path, but because of assumed different directory structures; can't just use the mappath value
+    destinationPathForCSSStyleURLMaps : '../'  + baseDirs.mapPath + '/' + baseDirs.codeRoot
 
 };
 
