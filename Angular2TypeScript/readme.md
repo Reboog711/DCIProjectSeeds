@@ -50,8 +50,9 @@ The scripts are located in gulpfile.js.
 * Configure this seed for compiling CSS
 * Configure this seed for unit tests
 * Figure out a way to Enable Prod mode for Angular 2 automatically when running the buildProd
+* Add instructions for adding new libraries, such as ng-bootstrap and/or ngx-datatable. They requires systemjs.config modifications and additions to config.js--copyGridAssets
+* Add task for copying static assets, such as images--copyStaticAssets
 
 ## Known Issues
 
 * The buildWatch task will not process HTML files that were created after the buildWatch task starts.
-
