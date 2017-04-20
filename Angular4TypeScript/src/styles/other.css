@@ -1,0 +1,7 @@
+/*
+Some place holder styles for the purpose of testing CSS processing
+ */
+body, input[text], button {
+    color: #888;
+    font-family: Cambria, Georgia;
+}
