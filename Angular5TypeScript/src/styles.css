@@ -1,0 +1,11 @@
+/*
+Some place holder styles for the purpose of testing CSS processing
+ */
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    margin: 2em;
+}
+
