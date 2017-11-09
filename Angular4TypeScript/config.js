@@ -13,7 +13,13 @@ var baseDirs = {
     destinationPath : 'build',
 
     // The path for the source map files in build directory; they are kept external by default
-    mapPath : 'maps'
+    mapPath : 'maps',
+
+    // The root directory for all the tests
+    testRoot : "tests/",
+
+    // The web server root for the web server created for running tests
+    testWebRoot : "base/"
 
 };
 
@@ -22,9 +28,19 @@ var configObject = {
     // will find all TypeScript files in the sourceRoot directory, recursively
     typeScriptSource : [baseDirs.sourceRoot + "**/*.ts"],
 
+    // a variable that points to the typeScript test source location
+    // finds all the TypeScript files in the sourceRoot, recursively
+    typeScriptTestSource : [baseDirs.testRoot + "**/*.ts"],
+
+
     //a variable that points to the HTML Source
     // will find all HTML Source files in the source root directory, recursively
     htmlSource : [baseDirs.sourceRoot + '**/*.html'],
+
+    // a variable that points to the HTML template files used by Angular components
+    // we assume all these will be under the com directory
+    // just used for unit testing since the above htmlSource variable will be used for most build scripts
+    htmlTemplateSource : [baseDirs.sourceRoot + baseDirs.codeRoot + '/**/*.html'],
 
     // The location of all JavaScript libraries stored in the source path
     // by default this just contains the systemJS Config used by Angular
@@ -67,6 +83,9 @@ var configObject = {
 
 };
 
+
+
+
 // these are values you probably won't want to change, but can
 var staticConfig = {
     // points to node_modules install
@@ -92,7 +111,23 @@ var staticConfig = {
 
     // variable to determine if source maps are used or not
     // by default true; but if we create a production build they are not generated
-    devMode : true
+    devMode : true,
+
+    // the patterns for all the test files
+    testFilePatterns : [
+        { pattern: baseDirs.testRoot + "base.test.ts" },
+        { pattern: configObject.typeScriptSource[0] },
+        { pattern: configObject.htmlTemplateSource[0] },
+        { pattern: configObject.cssStyleURLsSource[0] },
+        { pattern: configObject.typeScriptTestSource[0] }
+    ],
+
+    // patterns for files to ignore when testing
+    // defaulted to mainApp because that is replaced by base.test.ts
+    defaultDirsToExclude : [
+        baseDirs.sourceRoot + baseDirs.codeRoot + '/dotComIt/sample/main/main.ts',
+        //    baseDirs.sourceRoot + baseDirs.codeRoot + '/dotComIt/sample/main/app.module.*.ts',
+    ],
 
 };
 

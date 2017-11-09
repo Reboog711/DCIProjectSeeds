@@ -1,4 +1,4 @@
-# DotComIt Seed Project: Angular 2 w/ TypeScript
+# DotComIt Seed Project: Angular 4 w/ TypeScript
 
 This is a the base build script [DotComIt](http://www.dot-com-it.com) uses for creating Angular 4 projects.
 It is a work in progress, and loosely based on [another Angular2, TypeScript, Gulp project](https://github.com/kolorobot/angular2-typescript-gulp)
@@ -27,6 +27,7 @@ The scripts are located in gulpfile.js.
     * **src**: Your App's code goes here
         * **com**: Custom TypeScript files go here.
         * **js**: Local JavaScript libraries go here. A systemJS configuration file is included.
+    * **tests**: Your App's tests go here
 
 
 ## Gulp Task List
@@ -45,12 +46,13 @@ The scripts are located in gulpfile.js.
 * **cleanBuild**: A task to delete the build directory first, and then run a build.
 * **buildProd**: A task to build a production build.  First this runs the clean task; then it runs the build process.  If you run this task source maps will not be created.
 * **buildWatch**: A task to watch the build directories for changed HTML, TypeScript, or JavaScript files and re-build the app on the fly.
+* **test**: A task to run your tests.
 
 ## Todo List
 
-* Configure this seed for unit tests
 * Figure out a way to Enable Prod mode for Angular 2 automatically when running the buildProd
 * Write instructions for adding new libraries, such as ng-bootstrap and/or ngx-datatable. They requires systemjs.config modifications and additions to config.js--copyGridAssets
+* Remove Angular / other library map files when creating builds
 
 ## Known Issues
 

@@ -12,7 +12,7 @@ import { AppRoutingModule }     from '../nav/routing.module';
     BrowserModule,
     AppRoutingModule
   ],
-  declarations: [ AppComponent ],
+  declarations: [ AppComponent],
   providers : [{provide: LocationStrategy, useClass:HashLocationStrategy}],
   bootstrap:    [ AppComponent ]
 })

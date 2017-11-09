@@ -2,22 +2,21 @@
  * Created by jhouser on 3/30/2017.
  */
 
-/**
- * Created by jhouser on 3/29/2017.
- */
 
 import { NgModule }      from '@angular/core';
 import { RouterModule, Routes }   from '@angular/router';
+import {FirstComponent} from "../views/first/first.component";
+import {SecondComponent} from "../views/second/second.component";
 
 
-const routes : Routes = [
-/* TODO: Import the relevant components for each relevant app route
-    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-    { path: 'dashboard',  component: DashboardComponent },
-    { path: 'heroes',     component: HeroesListComponent }*/
+const ROUTES : Routes = [
+    { path: '', redirectTo: 'first', pathMatch: 'full' },
+    { path: 'first',  component: FirstComponent },
+    { path: 'second',     component: SecondComponent }
 ];
 @NgModule({
-    imports: [ RouterModule.forRoot(routes) ],
+    imports: [ RouterModule.forRoot(ROUTES) ],
+    declarations: [ FirstComponent, SecondComponent ],
     exports: [ RouterModule ]
 })
 

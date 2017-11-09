@@ -24,8 +24,9 @@
       '@angular/forms': 'js:@angular/forms/bundles/forms.umd.js',
 
       // other libraries
-      'rxjs':                      'js:rxjs',
-      'angular-in-memory-web-api': 'js:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js'
+      'rxjs':                      'js:rxjs'
+      /*, removing this library because we don't usually want a mock service in a real world app
+      'angular-in-memory-web-api': 'js:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js'*/
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
