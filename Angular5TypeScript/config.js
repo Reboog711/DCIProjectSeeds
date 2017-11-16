@@ -97,11 +97,10 @@ var staticConfig = {
     angularLibraries : [
         'core-js/client/shim.min.js',
         'zone.js/dist/**',
-        'reflect-metadata/Reflect.js',
         'systemjs/dist/system.src.js',
         '@angular/**/bundles/**',
         'rxjs/**/*.js',
-        'angular-in-memory-web-api/bundles/in-memory-web-api.umd.js'
+        'tslib/**.js'
     ],
 
     // a glob used to delete all files in the destination path before
