@@ -47,7 +47,9 @@ var karma = require("karma");
 gulp.task('tslint', function() {
     return gulp.src(config.typeScriptSource)
         .pipe(tslint({
-            formatter: 'prose'
+            formatter: 'prose',
+            // added for this bug https://github.com/panuhorsmalahti/gulp-tslint/issues/136
+            program: require("tslint").Linter.createProgram("./tsconfig.json")
         }))
         .pipe(tslint.report());
 });
@@ -130,7 +132,7 @@ gulp.task('cleanBuild', function () {
 // build a production build
 // deletes the build directory w/ clean; then sets the devMode to false; and runs the build task
 // devMode to true means no source maps.
-gulp.task('gul', function(){
+gulp.task('buildProd', function(){
     config.devMode = false;
     gulp.start('cleanBuild')
 });
