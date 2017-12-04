@@ -39,18 +39,14 @@
       "check-whitespace"
     ],
     "radix": true,
-    "semicolon": true,
+    "semicolon": false,
     "triple-equals": [
       true,
       "allow-null-check"
     ],
     "variable-name": false,
     "whitespace": [
-      true,
-      "check-branch",
-      "check-decl",
-      "check-operator",
-      "check-separator"
+      true
     ]
   }
 }
